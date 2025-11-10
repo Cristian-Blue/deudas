@@ -27,14 +27,7 @@ class DeudaService {
       }
       return 'Ingreado correctamente';
     } on DioException catch (e) {
-      if (e.response != null) {
-        if (e.response?.statusCode == 400) {
-          return e.response?.data['message'];
-        }
-        return 'Error del servidor: ${e.response?.statusCode}';
-      } else {
-        return 'Error de red. Revisa tu conexión a internet.';
-      }
+      return e.error?.toString() ?? 'Error inesperado';
     }
   }
 

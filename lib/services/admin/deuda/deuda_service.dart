@@ -1,8 +1,9 @@
+import 'package:cuenta/helpers/interceptor.dart';
 import 'package:cuenta/model/admin/producto_model.dart';
 import 'package:dio/dio.dart';
 
 class DeudaService {
-  static final _dio = Dio();
+  static final _dio = Dio()..interceptors.add(AuthInterceptor());
   static final url = 'https://api.escuelajs.co/api/v1';
 
   static Future<String> saveDeuda(

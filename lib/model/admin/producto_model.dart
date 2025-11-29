@@ -17,12 +17,20 @@ class ProductoModel {
 
   factory ProductoModel.fromJson(Map<String, dynamic> json) {
     return ProductoModel(
-      id: json['id'],
-      title: json['title'],
-      price: json['price'],
-      description: json['description'],
-      images: List<String>.from(json['images']),
-      category: json['category']['name'],
+      id: _parseId(json['id']),
+      title: json['title'] ?? 'No title',
+      price: json['price'] ?? 0,
+      description: json['description'] ?? 'No description',
+      images: List<String>.from(json['images'] ?? []),
+      category: json['category']?['name']?.toString() ?? 'No category',
     );
+  }
+
+  static int _parseId(dynamic value) {
+    if (value is int) return value;
+    if (value is String) {
+      return int.tryParse(value) ?? 0;
+    }
+    return 0;
   }
 }

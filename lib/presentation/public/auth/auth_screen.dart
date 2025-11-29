@@ -38,7 +38,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
     if (error == null) {
       // Éxito
-      context.goNamed('adminDeuda');
+      context.goNamed('Products');
     } else {
       // Fallo
       ScaffoldMessenger.of(

@@ -1,6 +1,7 @@
 import 'package:cuenta/model/admin/producto_model.dart';
 import 'package:cuenta/services/admin/deuda/deuda_service.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ConsultScreen extends StatefulWidget {
   const ConsultScreen({super.key});
@@ -27,6 +28,10 @@ class _ConsultScreenState extends State<ConsultScreen> {
     getDeudas();
   }
 
+  void sendToDetail(String id) {
+    context.push('/admin/deuda/$id');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +39,8 @@ class _ConsultScreenState extends State<ConsultScreen> {
         itemCount: deudas.length,
         itemBuilder: (context, index) {
           return ListTile(
+            onTap: () => sendToDetail(deudas[index].id.toString()),
+            leading: Text(deudas[index].price.toString()),
             title: Text(deudas[index].title),
             subtitle: Text(deudas[index].description),
           );

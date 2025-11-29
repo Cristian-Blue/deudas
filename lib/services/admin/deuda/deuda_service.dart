@@ -34,9 +34,6 @@ class DeudaService {
   static Future<List<ProductoModel>> getDeudas() async {
     final response = await _dio.get('$url/products');
     List<ProductoModel> deudas = [];
-    print("===============================");
-    print(response.data);
-    print("===============================");
     if (response.statusCode != 200) {
       return [];
     }
@@ -44,5 +41,13 @@ class DeudaService {
       deudas.add(ProductoModel.fromJson(item));
     }
     return deudas;
+  }
+
+  static Future<ProductoModel> getDetail(String id) async {
+    final response = await _dio.get('$url/products/$id');
+    if (response.statusCode != 200) {
+      return ProductoModel.fromJson({});
+    }
+    return ProductoModel.fromJson(response.data);
   }
 }

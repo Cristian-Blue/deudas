@@ -14,15 +14,13 @@ final appRouter = GoRouter(
     ShellRoute(
       builder: (context, state, child) => Layout(child: child),
       routes: [
-        ...routerConfigAdmin
-            .where((s) => s.inDrawer)
-            .map(
-              (screen) => GoRoute(
-                path: screen.patch,
-                builder: screen.screen,
-                name: screen.name,
-              ),
-            ),
+        ...routerConfigAdmin.map(
+          (screen) => GoRoute(
+            path: screen.patch,
+            builder: screen.screen,
+            name: screen.name,
+          ),
+        ),
       ],
     ),
   ],

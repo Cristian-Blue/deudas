@@ -3,6 +3,7 @@ import 'package:cuenta/presentation/shared/images/images_widget.dart';
 import 'package:cuenta/services/admin/deuda/deuda_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class DetailScreen extends StatefulWidget {
   final String id;
@@ -23,7 +24,6 @@ class _DetailScreenState extends State<DetailScreen> {
   );
   getDetail() async {
     final ProductoModel response = await DeudaService.getDetail(widget.id);
-    print(response);
     setState(() {
       data = response;
     });
@@ -39,46 +39,50 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      data.title,
-                      style: TextStyle(fontSize: 24),
-                      softWrap: true,
+        child: Skeletonizer(
+          enabled: data.id == 0,
+          enableSwitchAnimation: true,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        data.title,
+                        style: TextStyle(fontSize: 24),
+                        softWrap: true,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    _formatter.format(data.price),
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Theme.of(context).colorScheme.primary,
+                    SizedBox(width: 8),
+                    Text(
+                      _formatter.format(data.price),
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              ImagesWidget(images: data.images),
-              SizedBox(height: 16),
-              Chip(label: Text(data.category)),
-              SizedBox(height: 16),
-              Text(data.description, textAlign: TextAlign.justify),
-              SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  icon: Icon(Icons.save),
-                  label: Text('Añadir'),
-                  onPressed: () {},
+                  ],
                 ),
-              ),
-            ],
+                SizedBox(height: 16),
+                ImagesWidget(images: data.images),
+                SizedBox(height: 16),
+                Chip(label: Text(data.category)),
+                SizedBox(height: 16),
+                Text(data.description, textAlign: TextAlign.justify),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    icon: Icon(Icons.save),
+                    label: Text('Añadir'),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

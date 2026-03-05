@@ -12,15 +12,20 @@ final appRouter = GoRouter(
       builder: (context, state) => const AuthScreen(),
     ),
     ShellRoute(
-      builder: (context, state, child) => Layout(child: child),
+      builder: (context, state, child) {
+        return Layout(
+          child: child,
+          title: state.topRoute?.name ?? 'Administrador',
+        );
+      },
       routes: [
-        ...routerConfigAdmin.map(
-          (screen) => GoRoute(
+        ...routerConfigAdmin.map((screen) {
+          return GoRoute(
             path: screen.patch,
             builder: screen.screen,
             name: screen.name,
-          ),
-        ),
+          );
+        }),
       ],
     ),
   ],

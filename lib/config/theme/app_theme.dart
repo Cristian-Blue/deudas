@@ -21,7 +21,7 @@ class AppTheme {
 
   Color get colorTheme => _colorThemes[selectedColor];
 
-  ThemeData themeData() {
+  ThemeData themeData(bool brightness) {
     return ThemeData(
       useMaterial3: true,
       colorSchemeSeed: _colorThemes[selectedColor],
@@ -30,7 +30,7 @@ class AppTheme {
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
         centerTitle: false,
       ),
-      brightness: Brightness.dark,
+      brightness: brightness ? Brightness.dark : Brightness.light,
     );
   }
 }

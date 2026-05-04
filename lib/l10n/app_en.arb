@@ -1,0 +1,8 @@
+{
+  "login": "Login",
+  "username": "Username",
+  "password": "Password",
+  "usernameRequired": "Username is required",
+  "passwordRequired": "Password is required",
+  "completeFields": "Please complete all fields"
+}

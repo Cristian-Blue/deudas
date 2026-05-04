@@ -1,0 +1,8 @@
+{
+  "login": "Iniciar sesión",
+  "username": "Usuario",
+  "password": "Contraseña",
+  "usernameRequired": "El usuario es obligatorio",
+  "passwordRequired": "La contraseña es obligatoria",
+  "completeFields": "Por favor completa todos los campos"
+}
